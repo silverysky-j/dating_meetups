@@ -713,7 +713,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Егор */}
+          {/* Партнер 2 */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
             <div className="h-64 bg-muted overflow-hidden flex items-center justify-center bg-gradient-to-br from-primary/15 to-secondary">
               <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center">
@@ -722,7 +722,7 @@ export default function App() {
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-1" style={{ fontFamily: "'Lora', serif" }}>
-                Егор Дранев
+                Партнер Партнерычев
               </h3>
               <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Сооснователь</p>
               <p className="text-sm text-muted-foreground font-sans leading-relaxed">
