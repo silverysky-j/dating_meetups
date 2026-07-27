@@ -460,19 +460,29 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
         {screen !== "confirm" && (
           <div className="px-6 py-4 border-t border-border shrink-0 bg-background">
             {screen === "detail" && (
-              <button
-                onClick={() => {
-                  if (mFull && fFull) { setWaitlist(true); setScreen("confirm"); }
-                  else setScreen("form");
-                }}
-                className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
-              >
-                {mFull && fFull ? (
-                  <><Clock className="w-4 h-4" /> В лист ожидания</>
-                ) : (
-                  <><CreditCard className="w-4 h-4" /> Записаться · {dinner.price}</>
-                )}
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    if (mFull && fFull) { setWaitlist(true); setScreen("confirm"); }
+                    else setScreen("form");
+                  }}
+                  className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  {mFull && fFull ? (
+                    <><Clock className="w-4 h-4" /> В лист ожидания</>
+                  ) : (
+                    <><CreditCard className="w-4 h-4" /> Записаться · {dinner.price}</>
+                  )}
+                </button>
+                <a
+                  href="https://t.me/portion_admin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 rounded-xl font-sans font-medium text-sm border border-border text-foreground hover:bg-secondary active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <Send className="w-4 h-4" /> Записаться в Telegram
+                </a>
+              </div>
             )}
 
             {screen === "form" && formStep < 3 && (
@@ -597,8 +607,11 @@ export default function App() {
       {/* NAV */}
       <nav className="sticky top-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border">
         <div className="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
-          <span className="font-semibold text-foreground leading-tight" style={{ fontFamily: "'Lora', serif", fontSize: "18px" }}>
-            Порция знакомств
+          <span className="flex items-center gap-2">
+            <img src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785149907/logo1_dating_xbdik0.png" alt="" className="h-8 w-8 object-contain rounded-full" />
+            <span className="font-semibold text-foreground leading-tight" style={{ fontFamily: "'Lora', serif", fontSize: "18px" }}>
+              Порция знакомств
+            </span>
           </span>
           <button onClick={() => scrollTo("dinners")} className="text-sm font-medium text-primary hover:opacity-80 transition-opacity">
             Смотреть ужины
@@ -710,17 +723,26 @@ export default function App() {
       <section className="max-w-5xl mx-auto px-5 py-20">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6" style={{ fontFamily: "'Lora', serif" }}>О проекте</h2>
-           <p className="text-muted-foreground font-sans leading-relaxed">
-            «Порция знакомств» — это бранчи и ужины для тех, кому надоели бесконечные свайпы и рандомные нетворкинги.
+          <p className="text-muted-foreground font-sans leading-relaxed">
+            «Порция знакомств» — это бранчи и ужины для тех, кто не в отношениях и открыт к знакомствам.
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            Есть добрая история: один человек каждый день просил у бога выиграть в лотерею. Годы шли, а выигрыша всё не было — и однажды он услышал в ответ: «Ты хотя бы билет купи». Знакомства — тоже немного лотерея: чтобы встретить своего человека, нужно в ней участвовать. Вопрос в том, какую лотерею выбрать — где шансы повыше, а сам процесс приятнее.
+            Мы собираем участников так, чтобы шанс, что знакомство перерастёт во что-то большее, был не нулевым — балансируем по полу и семейному положению.
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            Для многих из нас дейтинг-приложения — это как раз изматывающий вариант такой лотереи: бесконечный свайп, разговор ни о чём, усталость ещё до самого знакомства. Мы захотели дать альтернативу. Собираем небольшие столы из людей с общим образом жизни — бегунов с бегунами, скалолазов со скалолазами — и оставляем пространство для живого разговора. Каждую заявку читает человек, а не алгоритм. Всё ещё без гарантий, всё ещё лотерея — но шансы выше, а сам вечер приятнее.
+            При этом сама встреча — не свидание и уж тем более не смотрины. Ужин — это возможность узнать несколько классных новых людей. И заодно — дать судьбе ещё одну попытку свести вас с нужным человеком, без лишнего давления.
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            А иногда на такой встрече находишь просто друга — а он потом знакомит тебя со своим человеком.
+            Знаете анекдот про «да ты хоть лотерейный билет купи»?
+          </p>
+          <p className="text-muted-foreground font-sans leading-relaxed mt-4">
+            Многие из нас хотят встретить своего человека, но не тянут билет — не знакомятся с новыми людьми. А может, стоит?
+          </p>
+          <p className="text-muted-foreground font-sans leading-relaxed mt-4">
+            Мы со своей стороны стараемся сделать эту лотерею с шансами повыше, чем в дейтинг-приложениях: собираем небольшие столы из людей с общим образом жизни или ценностями — бегунов с бегунами, бёрнеров с бёрнерами.
+          </p>
+          <p className="text-muted-foreground font-sans leading-relaxed mt-4">
+            А иногда на такой встрече находишь просто человека, близкого по духу, друга — а он потом знакомит тебя со своим человеком.
           </p>
         </div>
       </section>
@@ -731,10 +753,10 @@ export default function App() {
           Кто за этим стоит
         </h2>
         <p className="text-center text-muted-foreground font-sans mb-12 max-w-lg mx-auto">
-          Проект придумали двое — не стартаперы, а люди, которым самим надоело ходить на рандомные мероприятия.
+          Проект придумала не команда стартаперов, а Юля — потому что ей самой надоело ходить на рандомные мероприятия.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Юлия */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+          {/* Юля */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
             <div className="h-64 bg-muted overflow-hidden flex items-center justify-center bg-gradient-to-br from-primary/15 to-secondary">
               <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center">
@@ -743,30 +765,38 @@ export default function App() {
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-1" style={{ fontFamily: "'Lora', serif" }}>
-                Юлия Серебрийская
+                Юля
               </h3>
-              <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Сооснователь</p>
-              <p className="text-sm text-muted-foreground font-sans leading-relaxed">
-                Психолог и фасилитатор. Последние три года изучает, как люди заводят настоящие связи во взрослом возрасте. Придумала формат стола после того, как сама сходила на десяток «нетворкингов» и ни разу не нашла там близких по духу людей.
-              </p>
+              <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Основательница</p>
+              <div className="text-sm text-muted-foreground font-sans leading-relaxed flex flex-col gap-3">
+                <p>Привет, я Юля, и в детстве я очень любила ромкомы (романтические комедии).</p>
+                <p>Я выросла, стала руководителем аналитики, номадом, предпринимателем — но с ромкомами ничего не изменилось, я всё ещё их люблю :) И иногда создаю.</p>
+                <p>Весной 2026 года я вела мастермайнд про дейтинг — к концу 2 из 5 участников были в отношениях. Конечно, благодаря им самим, но и наши встречи внесли какую-то лепту.</p>
+                <p>Есть и ещё одна очень счастливая история, но она так мне дорога, что я вам не расскажу. Из неё я поняла: едва ли существует способ поменять чью-то жизнь так радикально к лучшему, как познакомить с правильным человеком — партнёром на жизнь.</p>
+                <p>Этот проект я продолжаю с надеждой, что кто-то из вас встретит своего человека — того, с кем нестрашно и весело строить жизнь.</p>
+              </div>
             </div>
           </div>
 
-          {/* Партнер 2 */}
-          <div className="bg-card border border-border rounded-2xl overflow-hidden">
-            <div className="h-64 bg-muted overflow-hidden flex items-center justify-center bg-gradient-to-br from-primary/15 to-secondary">
-              <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-3xl font-semibold text-primary" style={{ fontFamily: "'Lora', serif" }}>Е</span>
+          {/* Открытая позиция */}
+          <div className="bg-card border border-dashed border-border rounded-2xl overflow-hidden">
+            <div className="h-64 bg-muted overflow-hidden flex items-center justify-center bg-gradient-to-br from-secondary to-secondary">
+              <div className="w-24 h-24 rounded-full border-2 border-dashed border-primary/40 flex items-center justify-center">
+                <span className="text-3xl font-semibold text-primary/50" style={{ fontFamily: "'Lora', serif" }}>?</span>
               </div>
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-1" style={{ fontFamily: "'Lora', serif" }}>
-                Партнер Партнерычев
+                Возможно, это вы?
               </h3>
-              <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Сооснователь</p>
-              <p className="text-sm text-muted-foreground font-sans leading-relaxed">
-                Продакт и сооснователь нескольких проектов в медиа и еде. Верит, что лучшие разговоры случаются за столом — и что к этому можно подготовиться лучше, чем просто собрать незнакомых людей в одной комнате.
-              </p>
+              <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Это место пока свободно</p>
+              <div className="text-sm text-muted-foreground font-sans leading-relaxed flex flex-col gap-3">
+                <p>Партнёрство — одна из больших ценностей для меня (Юли). У проекта впереди долгий путь со своими вызовами. И для устойчивости на этом пути мне нужен человек, с которым я иду плечом к плечу к одной цели.</p>
+                <p>
+                  Если вы видите, как могли бы принести пользу проекту — напишите в телеграм: {" "}
+                  <a href="https://t.me/portion_admin" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">t.me/portion_admin</a>. Особенно ценно, если у вас есть опыт в маркетинге ивент-проектов, но это не обязательное условие. Возможно, пазл складывается иначе :)
+                </p>
+              </div>
             </div>
           </div>
         </div>
