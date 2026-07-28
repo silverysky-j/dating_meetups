@@ -9,7 +9,7 @@ import {
 type Dinner = {
   id: number;
   title: string;
-  ageRanges: [string, string];
+  ageRanges: string[];
   format: string;
   date: string;
   time: string;
@@ -26,6 +26,14 @@ type Dinner = {
 };
 
 const dinners: Dinner[] = [
+  {
+    id: 7, title: "Смена и друзья", ageRanges: ["27–35"], format: "ужин", date: "3 августа, пн", time: "19:30",
+    area: "Центр · Москва", price: "800 ₽", priceNum: 800,
+    spotsM: 1, spotsF: 1, emoji: "🏕️", tag: "Комьюнити",
+    description: "Стол для участников комьюнити «Станция Смена» — коворкинга-лагеря для удалёнщиков. Приходи сам или закинь приглашение другу, которому тоже откликнется этот вайб.",
+    criteria: "Возраст 27–35 лет. Причастность к «Станции Смена» — участник или приглашённый друг участника.",
+    question: "Как ты связан со «Сменой» — был на смене, знаешь кого-то оттуда?",
+  },
   {
     id: 1, title: "Runners", ageRanges: ["22–30", "31–40"], format: "бранч", date: "8 августа, сб", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
@@ -62,8 +70,8 @@ const dinners: Dinner[] = [
     id: 5, title: "Рядом: Верх Зеленой", ageRanges: ["22–30", "31–40"], format: "бранч", date: "29 августа, сб", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
     spotsM: 2, spotsF: 1, emoji: "📍", tag: "Соседи",
-    description: "Стол для тех, кто живёт рядом с Верхней Зелёной — чтобы наконец познакомиться с соседями, а не только с людьми с другого конца города.",
-    criteria: "Возраст 22–30 или 31–40 лет. Живёшь рядом с Верхней Зелёной или готов сюда приезжать.",
+    description: "Стол для тех, кто живёт наверху зелёной ветки метро — от Ховрино до Белорусской. Чтобы наконец познакомиться с соседями, а не только с людьми с другого конца города.",
+    criteria: "Возраст 22–30 или 31–40 лет. Живёшь в районе от Ховрино до Белорусской или готов сюда приезжать.",
     question: "Как долго живёшь в этом районе и что тебе в нём больше всего нравится?",
   }, 
   {
@@ -93,23 +101,28 @@ function useBodyLock(active: boolean) {
 
 function DinnerCard({ dinner, onOpen }: { dinner: Dinner; onOpen: () => void }) {
   const weekday = dinner.date.split(", ")[1] ?? "";
+  const isPremium = dinner.tag === "Премиум";
   return (
     <div
       onClick={onOpen}
-      className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 hover:shadow-md hover:border-primary/30 transition-all duration-300 cursor-pointer group"
+      className={`rounded-2xl p-6 flex flex-col gap-4 border transition-all duration-300 cursor-pointer group ${
+        isPremium
+          ? "bg-gradient-to-br from-[#FBF3DC] to-[#F0DFA9] border-[#D4AF37]/50 hover:border-[#D4AF37] hover:shadow-lg"
+          : "bg-card border-border hover:shadow-md hover:border-primary/30"
+      }`}
     >
       <div className="flex items-start justify-between">
         <div>
-          <span className="text-xs font-medium text-muted-foreground tracking-wide uppercase font-sans">{dinner.tag}</span>
+          <span className={`text-xs font-medium tracking-wide uppercase font-sans ${isPremium ? "text-[#8A6D1D]" : "text-muted-foreground"}`}>{dinner.tag}</span>
           <h3 className="text-xl font-display font-semibold text-foreground mt-0.5 leading-tight" style={{ fontFamily: "'Lora', serif" }}>
             {dinner.emoji} {dinner.title}
           </h3>
         </div>
-        <span className="text-lg font-semibold text-primary whitespace-nowrap" style={{ fontFamily: "'Lora', serif" }}>{dinner.price}</span>
+        <span className={`text-lg font-semibold whitespace-nowrap ${isPremium ? "text-[#8A6D1D]" : "text-primary"}`} style={{ fontFamily: "'Lora', serif" }}>{dinner.price}</span>
       </div>
       <div className="flex gap-2">
         {dinner.ageRanges.map((r) => (
-          <span key={r} className="text-xs font-sans font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">{r} лет</span>
+          <span key={r} className={`text-xs font-sans font-medium px-2.5 py-1 rounded-full ${isPremium ? "text-[#8A6D1D] bg-[#D4AF37]/15" : "text-primary bg-primary/10"}`}>{r} лет</span>
         ))}
       </div>
       <div className="flex flex-col gap-2">
@@ -123,10 +136,14 @@ function DinnerCard({ dinner, onOpen }: { dinner: Dinner; onOpen: () => void }) 
           <MapPin className="w-4 h-4 shrink-0" />{dinner.area}
         </div>
       </div>
-      <div className="mt-auto pt-2 border-t border-border">
+      <div className={`mt-auto pt-2 border-t ${isPremium ? "border-[#D4AF37]/30" : "border-border"}`}>
         <button
           onClick={(e) => { e.stopPropagation(); onOpen(); }}
-          className="w-full py-2.5 rounded-xl text-sm font-sans font-medium bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
+          className={`w-full py-2.5 rounded-xl text-sm font-sans font-medium transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.98] ${
+            isPremium
+              ? "bg-gradient-to-r from-[#D4AF37] to-[#B8942A] text-white hover:opacity-90"
+              : "bg-primary text-primary-foreground hover:opacity-90"
+          }`}
         >
           Подробнее <ArrowRight className="w-4 h-4" />
         </button>
@@ -152,6 +169,7 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
   }, [onClose]);
 
   const telegramHref = `https://t.me/portion_admin?text=${encodeURIComponent(`Привет, меня заинтересовал стол ${dinner.title}`)}`;
+  const isPremium = dinner.tag === "Премиум";
 
   return (
     <div
@@ -191,7 +209,7 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
             {/* Age ranges */}
             <div className="flex gap-2">
               {dinner.ageRanges.map((r) => (
-                <span key={r} className="text-xs font-sans font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">{r} лет</span>
+                <span key={r} className={`text-xs font-sans font-medium px-2.5 py-1 rounded-full ${isPremium ? "text-[#8A6D1D] bg-[#D4AF37]/15" : "text-primary bg-primary/10"}`}>{r} лет</span>
               ))}
             </div>
 
@@ -210,7 +228,7 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
                   "Все участники сейчас вне отношений и открыты к знакомству, но мы предлагаем настроиться на дружеский вайб — пока это только знакомство, а не свидание",
                   "Мы пришлём вопросы, которые помогут начать знакомиться",
                   "Каждый платит за себя",
-                  "~2–2.5 часа за одним столом",
+                  "~1,5–2 часа за одним столом",
                   "Место: ресторан в центре Москвы, сообщим ближе к встрече",
                   "После встречи вы можете обменяться контактами сами или попросить админа уточнить у понравившегося человека, не против ли он или она",
                 ].map((item, i) => (
@@ -235,7 +253,9 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
             href={telegramHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
+            className={`w-full py-3.5 rounded-xl font-sans font-medium text-sm hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 ${
+              isPremium ? "bg-gradient-to-r from-[#D4AF37] to-[#B8942A] text-white" : "bg-primary text-primary-foreground"
+            }`}
           >
             <Send className="w-4 h-4" /> Записаться — перейти в Telegram
           </a>
@@ -370,7 +390,7 @@ export default function App() {
             {[
               { emoji: "🍽️", title: "Общий стол на шестерых", desc: "Трое мужчин и три женщины, объединённые общим образом жизни." },
               { emoji: "🎲", title: "Игра-знакомство в начале", desc: "Пришлём вопросы, которые помогут разговориться с первых минут." },
-              { emoji: "💬", title: "~2–2.5 часа разговора", desc: "Достаточно, чтобы понять, есть ли химия — без спешки и неловкости." },
+              { emoji: "💬", title: "~1,5–2 часа разговора", desc: "Достаточно, чтобы понять, есть ли химия — без спешки и неловкости." },
               { emoji: "💳", title: "Каждый платит за себя", desc: "У каждого свой чек — платишь только за то, что заказал(а) сам(а)." },
               { emoji: "🎯", title: "Без ожиданий", desc: "Это не свидание вслепую. Может получиться дружба, может — больше." },
               { emoji: "📍", title: "Место выбираем мы", desc: "Уютный ресторан в центре Москвы — детали пришлём заранее." },
@@ -415,10 +435,13 @@ export default function App() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
           {/* Юля */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
-            <div className="h-64 bg-muted overflow-hidden flex items-center justify-center bg-gradient-to-br from-primary/15 to-secondary">
-              <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-3xl font-semibold text-primary" style={{ fontFamily: "'Lora', serif" }}>Ю</span>
-              </div>
+            <div className="h-64 bg-muted overflow-hidden">
+              <img
+                src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785264064/IMG20251209210939_fnpb6i.jpg"
+                alt="Юлия Серебрийская"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: "center 25%" }}
+              />
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-1" style={{ fontFamily: "'Lora', serif" }}>
