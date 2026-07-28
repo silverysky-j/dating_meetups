@@ -439,7 +439,7 @@ export default function App() {
                 src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785264064/IMG20251209210939_fnpb6i.jpg"
                 alt="Юлия Серебрийская"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "center 55%" }}
+                style={{ objectPosition: "center 50%" }}
               />
             </div>
             <div className="p-6">
