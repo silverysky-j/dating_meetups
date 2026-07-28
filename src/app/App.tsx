@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  ChevronDown, ArrowRight, MapPin, Calendar, RotateCcw,
-  Send, Clock, X, Check, CreditCard, ChevronLeft, Lock
+  ChevronDown, ArrowRight, MapPin, Calendar,
+  Send, Clock, X
 } from "lucide-react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -27,7 +27,7 @@ type Dinner = {
 
 const dinners: Dinner[] = [
   {
-    id: 1, title: "Runners", ageRanges: ["22–30", "31–40"], format: "ужин", date: "9 августа, сб", time: "19:30",
+    id: 1, title: "Runners", ageRanges: ["22–30", "31–40"], format: "бранч", date: "8 августа, сб", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
     spotsM: 0, spotsF: 2, emoji: "🏃", tag: "Спорт",
     description: "Стол для тех, кто пробежал достаточно, чтобы сравнивать кроссовки и маршруты.",
@@ -35,7 +35,7 @@ const dinners: Dinner[] = [
     question: "Как давно бегаешь? Есть ли дистанция, к которой сейчас готовишься?",
   },
   {
-    id: 2, title: "Скалолазы", ageRanges: ["22–30", "31–40"], format: "ужин", date: "16 августа, сб", time: "19:30",
+    id: 2, title: "Скалолазы", ageRanges: ["22–30", "31–40"], format: "бранч", date: "9 августа, вс", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
     spotsM: 1, spotsF: 1, emoji: "🧗", tag: "Спорт",
     description: "Стол для тех, кто регулярно лазает — на скалодроме или на настоящих скалах. Разговор найдётся сам собой, даже если маршруты и грейды у всех разные.",
@@ -43,7 +43,7 @@ const dinners: Dinner[] = [
     question: "Как давно лазаешь и на каком скалодроме или в каких горах чаще всего бываешь?",
   },
   {
-    id: 3, title: "Burners", ageRanges: ["22–30", "31–40"], format: "ужин", date: "30 августа, сб", time: "19:30",
+    id: 3, title: "Burners", ageRanges: ["22–30", "31–40"], format: "бранч", date: "15 августа, сб", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
     spotsM: 1, spotsF: 0, emoji: "✂️", tag: "Культура",
     description: "Стол вокруг аудитории сообщества Burning Man и локальных берн комьюнити",
@@ -51,7 +51,7 @@ const dinners: Dinner[] = [
     question: "Откуда ты про нас узнал и как связан со «Сменой» или пространством вокруг неё?",
   },
   {
-    id: 4, title: "Фаундеры", ageRanges: ["22–30", "31–40"], format: "ужин", date: "6 сентября, сб", time: "19:30",
+    id: 4, title: "Фаундеры", ageRanges: ["22–30", "31–40"], format: "бранч", date: "16 августа, вс", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
     spotsM: 2, spotsF: 1, emoji: "🎨", tag: "Деятельность",
     description: "Стол для фаундеров и фаундерок. Рады участникам комьюнити Хегай, Р-Фаундерс, Атланты и других бизнес-сообществ — но записаться можно и без членства в них.",
@@ -59,7 +59,7 @@ const dinners: Dinner[] = [
     question: "Как ты связан с бизнесом? Чем занимаешься — что создаёшь и продаёшь?",
   }, 
   {
-    id: 5, title: "Рядом: Верх Зеленой", ageRanges: ["22–30", "31–40"], format: "ужин", date: "6 сентября, сб", time: "19:30",
+    id: 5, title: "Рядом: Верх Зеленой", ageRanges: ["22–30", "31–40"], format: "бранч", date: "29 августа, сб", time: "12:30",
     area: "Центр · Москва", price: "1 600 ₽", priceNum: 1600,
     spotsM: 2, spotsF: 1, emoji: "📍", tag: "Соседи",
     description: "Стол для тех, кто живёт рядом с Верхней Зелёной — чтобы наконец познакомиться с соседями, а не только с людьми с другого конца города.",
@@ -67,7 +67,7 @@ const dinners: Dinner[] = [
     question: "Как долго живёшь в этом районе и что тебе в нём больше всего нравится?",
   }, 
   {
-    id: 6, title: "Состоятельные", ageRanges: ["22–30", "31–40"], format: "ужин", date: "13 сентября, сб", time: "20:00",
+    id: 6, title: "Состоятельные", ageRanges: ["22–30", "31–40"], format: "бранч", date: "30 августа, вс", time: "12:30",
     area: "Центр · Москва", price: "16 000 ₽", priceNum: 16000,
     spotsM: 1, spotsF: 1, emoji: "🍷", tag: "Премиум",
     description: "Давайте честно, чаще всего люди образуют пары с человеком из своего социального слоя, потому что эти люди могут друг друга понять, а их образ жизни схож и совместим. Эта встреча имеет заградительную цену и предназначена для тех, кто легко может потратить 16 000 на небольшой социальный эксперимент. Отбор строже — анкета и разговор с организатором.",
@@ -135,58 +135,11 @@ function DinnerCard({ dinner, onOpen }: { dinner: Dinner; onOpen: () => void }) 
   );
 }
 
-// ─── Stepper ──────────────────────────────────────────────────────────────────
-
-function Stepper({ step }: { step: number }) {
-  const steps = ["Данные", "О себе", "Согласие"];
-  return (
-    <div className="flex items-center gap-0">
-      {steps.map((label, i) => {
-        const idx = i + 1;
-        const done = step > idx;
-        const active = step === idx;
-        return (
-          <div key={i} className="flex items-center">
-            <div className="flex flex-col items-center gap-1">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-sans font-medium transition-all duration-300 ${done ? "bg-primary text-primary-foreground" : active ? "bg-primary text-primary-foreground ring-4 ring-primary/20" : "bg-muted text-muted-foreground"}`}>
-                {done ? <Check className="w-4 h-4" /> : idx}
-              </div>
-              <span className={`text-xs font-sans whitespace-nowrap ${active ? "text-foreground font-medium" : "text-muted-foreground"}`}>{label}</span>
-            </div>
-            {i < steps.length - 1 && (
-              <div className={`h-px w-10 sm:w-16 mx-1 mb-5 transition-all duration-300 ${done ? "bg-primary" : "bg-border"}`} />
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 // ─── Modal ────────────────────────────────────────────────────────────────────
-
-type ModalScreen = "detail" | "form" | "payment" | "confirm";
 
 function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void }) {
   useBodyLock(true);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [screen, setScreen] = useState<ModalScreen>("detail");
-  const [formStep, setFormStep] = useState(1);
-  const [gender, setGender] = useState<"male" | "female" | "">("");
-  const [form, setForm] = useState({ name: "", age: "", telegram: "", experience: "" });
-  const [agree, setAgree] = useState({ refund: false, friendly: false, split: false });
-  const [waitlist, setWaitlist] = useState(false);
-
-  const mFull = dinner.spotsM >= 3;
-  const fFull = dinner.spotsF >= 3;
-  const confirmDate = (() => {
-    const parts = dinner.date.split(", ")[0].split(" ");
-    const months: Record<string, string> = { "января": "01", "февраля": "02", "марта": "03", "апреля": "04", "мая": "05", "июня": "06", "июля": "07", "августа": "08", "сентября": "09", "октября": "10", "ноября": "11", "декабря": "12" };
-    const d = parseInt(parts[0]) - 5;
-    return `${d} ${parts[1]}`;
-  })();
-
-  const allAgreed = agree.refund && agree.friendly && agree.split;
 
   function handleOverlayClick(e: React.MouseEvent) {
     if (e.target === overlayRef.current) onClose();
@@ -198,7 +151,7 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const canRegister = gender === "male" ? !mFull : gender === "female" ? !fFull : true;
+  const telegramHref = `https://t.me/portion_admin?text=${encodeURIComponent(`Привет, меня заинтересовал стол ${dinner.title}`)}`;
 
   return (
     <div
@@ -209,21 +162,11 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
       <div className="bg-background w-full sm:max-w-xl max-h-[96dvh] sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl flex flex-col shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
-          <div className="flex items-center gap-3">
-            {(screen === "form" || screen === "payment") && (
-              <button
-                onClick={() => screen === "payment" ? setScreen("form") : screen === "form" && formStep > 1 ? setFormStep(formStep - 1) : setScreen("detail")}
-                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-muted transition-colors"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-            )}
-            <div>
-              <p className="text-xs text-muted-foreground font-sans">{dinner.tag}</p>
-              <h2 className="font-semibold text-foreground text-base leading-tight" style={{ fontFamily: "'Lora', serif" }}>
-                {dinner.emoji} {dinner.title}
-              </h2>
-            </div>
+          <div>
+            <p className="text-xs text-muted-foreground font-sans">{dinner.tag}</p>
+            <h2 className="font-semibold text-foreground text-base leading-tight" style={{ fontFamily: "'Lora', serif" }}>
+              {dinner.emoji} {dinner.title}
+            </h2>
           </div>
           <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-muted transition-colors">
             <X className="w-4 h-4" />
@@ -232,332 +175,76 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
 
         {/* Body */}
         <div className="overflow-y-auto flex-1">
-
-          {/* ── DETAIL ── */}
-          {screen === "detail" && (
-            <div className="px-6 py-6 flex flex-col gap-6">
-              {/* Meta */}
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground font-sans">
-                  <Calendar className="w-4 h-4 shrink-0" />
-                  {dinner.date} · {dinner.time}
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground font-sans">
-                  <MapPin className="w-4 h-4 shrink-0" />
-                  {dinner.area}
-                </div>
+          <div className="px-6 py-6 flex flex-col gap-6">
+            {/* Meta */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground font-sans">
+                <Calendar className="w-4 h-4 shrink-0" />
+                {dinner.format}, {dinner.date} · {dinner.time}
               </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground font-sans">
+                <MapPin className="w-4 h-4 shrink-0" />
+                {dinner.area}
+              </div>
+            </div>
 
-              {/* Age ranges */}
-              <div className="flex gap-2">
-                {dinner.ageRanges.map((r) => (
-                  <span key={r} className="text-xs font-sans font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">{r} лет</span>
+            {/* Age ranges */}
+            <div className="flex gap-2">
+              {dinner.ageRanges.map((r) => (
+                <span key={r} className="text-xs font-sans font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">{r} лет</span>
+              ))}
+            </div>
+
+            {/* Who this table is for */}
+            <div>
+              <h3 className="font-sans font-semibold text-foreground mb-2">Для кого этот стол</h3>
+              <p className="text-sm text-muted-foreground font-sans leading-relaxed">{dinner.description}</p>
+              <p className="text-sm text-muted-foreground font-sans leading-relaxed mt-3">{dinner.criteria}</p>
+            </div>
+
+            {/* How it goes */}
+            <div className="border border-border rounded-2xl p-5 flex flex-col gap-3">
+              <h3 className="font-sans font-semibold text-foreground">Как проходит встреча</h3>
+              <ul className="flex flex-col gap-2">
+                {[
+                  "Все участники сейчас вне отношений и открыты к знакомству, но мы предлагаем настроиться на дружеский вайб — пока это только знакомство, а не свидание",
+                  "Мы пришлём вопросы, которые помогут начать знакомиться",
+                  "Каждый платит за себя",
+                  "~2–2.5 часа за одним столом",
+                  "Место: ресторан в центре Москвы, сообщим ближе к встрече",
+                  "После встречи вы можете обменяться контактами сами или попросить админа уточнить у понравившегося человека, не против ли он или она",
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-2.5 text-sm text-muted-foreground font-sans">
+                    <span className="text-primary mt-0.5 shrink-0">·</span>{item}
+                  </li>
                 ))}
-              </div>
-
-              {/* Description */}
-              <div>
-                <h3 className="font-sans font-semibold text-foreground mb-2">Кто за этим столом</h3>
-                <p className="text-sm text-muted-foreground font-sans leading-relaxed">{dinner.description}</p>
-              </div>
-
-              {/* Criteria */}
-              <div className="bg-secondary rounded-2xl p-4">
-                <p className="text-xs font-sans font-semibold text-primary uppercase tracking-widest mb-2">Критерии отбора</p>
-                <p className="text-sm text-muted-foreground font-sans leading-relaxed">{dinner.criteria}</p>
-              </div>
-
-              {/* How it goes */}
-              <div className="border border-border rounded-2xl p-5 flex flex-col gap-3">
-                <h3 className="font-sans font-semibold text-foreground">Как проходит встреча</h3>
-                <ul className="flex flex-col gap-2">
-                  {[
-                    "Все участники — синглы, но вечер дружеский, не романтический",
-                    "Без давления: это знакомство, не свидание",
-                    "Каждый платит за себя (сплит по счёту)",
-                    "~2–2.5 часа за одним столом",
-                    "Место: ресторан в центре Москвы, сообщим ближе к встрече",
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-2.5 text-sm text-muted-foreground font-sans">
-                      <span className="text-primary mt-0.5 shrink-0">·</span>{item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Price line */}
-              <div className="flex items-center justify-between border-t border-border pt-4">
-                <span className="text-sm text-muted-foreground font-sans">Стоимость бронирования</span>
-                <span className="text-xl font-semibold text-foreground" style={{ fontFamily: "'Lora', serif" }}>{dinner.price}</span>
-              </div>
+              </ul>
             </div>
-          )}
 
-          {/* ── FORM ── */}
-          {screen === "form" && (
-            <div className="px-6 py-6 flex flex-col gap-6">
-              <div className="flex justify-center">
-                <Stepper step={formStep} />
-              </div>
-
-              {formStep === 1 && (
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-semibold text-foreground" style={{ fontFamily: "'Lora', serif" }}>Расскажи о себе</h3>
-                  <Field label="Имя">
-                    <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Как тебя зовут" className={inputCls} />
-                  </Field>
-                  <Field label="Возраст">
-                    <input value={form.age} onChange={e => setForm({ ...form, age: e.target.value })} placeholder="Полных лет" type="number" min={18} max={60} className={inputCls} />
-                  </Field>
-                  <Field label="Пол">
-                    <div className="flex gap-3">
-                      {(["male", "female"] as const).map((g) => (
-                        <button
-                          key={g}
-                          onClick={() => setGender(g)}
-                          className={`flex-1 py-2.5 rounded-xl border text-sm font-sans font-medium transition-all duration-200 ${gender === g ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}
-                        >
-                          {g === "male" ? "👨 Мужской" : "👩 Женский"}
-                        </button>
-                      ))}
-                    </div>
-                  </Field>
-                  <Field label="Telegram">
-                    <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-sans text-sm">@</span>
-                      <input value={form.telegram} onChange={e => setForm({ ...form, telegram: e.target.value })} placeholder="username" className={inputCls + " pl-8"} />
-                    </div>
-                  </Field>
-                </div>
-              )}
-
-              {formStep === 2 && (
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-semibold text-foreground" style={{ fontFamily: "'Lora', serif" }}>Немного о твоём опыте</h3>
-                  <p className="text-sm text-muted-foreground font-sans leading-relaxed bg-secondary rounded-xl p-4">
-                    {dinner.question}
-                  </p>
-                  <Field label="Твой ответ">
-                    <textarea
-                      value={form.experience}
-                      onChange={e => setForm({ ...form, experience: e.target.value })}
-                      placeholder="Пиши свободно, 2–4 предложения"
-                      rows={5}
-                      className={inputCls + " resize-none"}
-                    />
-                  </Field>
-                  <p className="text-xs text-muted-foreground font-sans">Анкету читаем вручную — напиши честно.</p>
-                </div>
-              )}
-
-              {formStep === 3 && (
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-semibold text-foreground" style={{ fontFamily: "'Lora', serif" }}>Прочитай и подтверди</h3>
-                  {[
-                    { key: "refund" as const, text: "Понимаю, что если стол не наберётся за 2 дня до встречи, оплата будет возвращена в полном объёме." },
-                    { key: "friendly" as const, text: "Понимаю, что это дружеский ужин, а не свидание вслепую. Без романтических ожиданий и давления." },
-                    { key: "split" as const, text: "Готов(а) платить за себя по счёту (сплит). Стоимость ужина в ресторане оплачивается отдельно." },
-                  ].map(({ key, text }) => (
-                    <label key={key} className="flex gap-3 cursor-pointer">
-                      <button
-                        onClick={() => setAgree({ ...agree, [key]: !agree[key] })}
-                        className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center transition-all duration-200 ${agree[key] ? "bg-primary border-primary" : "border-border"}`}
-                      >
-                        {agree[key] && <Check className="w-3 h-3 text-primary-foreground" />}
-                      </button>
-                      <span className="text-sm text-muted-foreground font-sans leading-relaxed">{text}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
+            {/* Price line */}
+            <div className="flex items-center justify-between border-t border-border pt-4">
+              <span className="text-sm text-muted-foreground font-sans">Стоимость бронирования</span>
+              <span className="text-xl font-semibold text-foreground" style={{ fontFamily: "'Lora', serif" }}>{dinner.price}</span>
             </div>
-          )}
-
-          {/* ── PAYMENT ── */}
-          {screen === "payment" && (
-            <div className="px-6 py-6 flex flex-col gap-6">
-              <div className="text-center">
-                <div className="text-4xl mb-3">💳</div>
-                <h3 className="font-semibold text-foreground text-xl mb-1" style={{ fontFamily: "'Lora', serif" }}>Оплата брони</h3>
-                <p className="text-sm text-muted-foreground font-sans">Стол будет зарезервирован сразу после оплаты</p>
-              </div>
-
-              <div className="bg-secondary rounded-2xl p-5 flex flex-col gap-3">
-                <div className="flex justify-between text-sm font-sans">
-                  <span className="text-muted-foreground">Ужин «{dinner.title}»</span>
-                  <span className="font-medium text-foreground">{dinner.price}</span>
-                </div>
-                <div className="flex justify-between text-sm font-sans">
-                  <span className="text-muted-foreground">{dinner.date} · {dinner.time}</span>
-                  <span className="text-muted-foreground">{dinner.area}</span>
-                </div>
-                <div className="border-t border-border pt-3 flex justify-between font-sans">
-                  <span className="font-medium text-foreground">Итого</span>
-                  <span className="font-semibold text-foreground text-lg" style={{ fontFamily: "'Lora', serif" }}>{dinner.price}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <Field label="Номер карты">
-                  <input placeholder="0000 0000 0000 0000" className={inputCls} maxLength={19} />
-                </Field>
-                <div className="flex gap-3">
-                  <Field label="Срок действия" className="flex-1">
-                    <input placeholder="MM/YY" className={inputCls} maxLength={5} />
-                  </Field>
-                  <Field label="CVV" className="flex-1">
-                    <input placeholder="···" className={inputCls} maxLength={3} type="password" />
-                  </Field>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 text-xs text-muted-foreground font-sans">
-                <Lock className="w-3.5 h-3.5 shrink-0" />
-                Платёж защищён. Данные карты не хранятся.
-              </div>
-            </div>
-          )}
-
-          {/* ── CONFIRM ── */}
-          {screen === "confirm" && (
-            <div className="px-6 py-8 flex flex-col gap-6 text-center">
-              <div>
-                <div className="text-5xl mb-4">{waitlist ? "🕐" : "🎉"}</div>
-                {waitlist ? (
-                  <>
-                    <h3 className="font-semibold text-foreground text-2xl mb-2" style={{ fontFamily: "'Lora', serif" }}>Вы в листе ожидания</h3>
-                    <p className="text-muted-foreground font-sans text-sm leading-relaxed max-w-xs mx-auto">Если освободится место — напишем в Telegram первым.</p>
-                  </>
-                ) : (
-                  <>
-                    <h3 className="font-semibold text-foreground text-2xl mb-2" style={{ fontFamily: "'Lora', serif" }}>Вы записаны!</h3>
-                    <p className="text-sm text-muted-foreground font-sans">Место забронировано</p>
-                  </>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-3 text-left">
-                <div className="bg-card border border-border rounded-2xl p-4 flex flex-col gap-2.5">
-                  <InfoRow icon="📅" label="Ужин состоится" value={`${dinner.date} · ${dinner.time}`} />
-                  <InfoRow icon="📍" label="Место" value={dinner.area} />
-                  <InfoRow icon="🍽️" label="Ресторан" value="Сообщим за 2 дня до встречи" />
-                  <InfoRow icon="✅" label="Подтверждение" value={`До ${confirmDate} в Telegram`} />
-                  <InfoRow icon="💬" label="Канал уведомлений" value="@zastolom_bot" />
-                </div>
-
-                <div className="flex items-start gap-3 bg-primary/5 border border-primary/15 rounded-2xl p-4">
-                  <RotateCcw className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                  <p className="text-sm text-muted-foreground font-sans leading-relaxed">
-                    Если за 2 дня до встречи стол не наберётся — вернём {dinner.price} в течение 3 рабочих дней.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
 
         {/* Footer CTA */}
-        {screen !== "confirm" && (
-          <div className="px-6 py-4 border-t border-border shrink-0 bg-background">
-            {screen === "detail" && (
-              <div className="flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    if (mFull && fFull) { setWaitlist(true); setScreen("confirm"); }
-                    else setScreen("form");
-                  }}
-                  className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
-                >
-                  {mFull && fFull ? (
-                    <><Clock className="w-4 h-4" /> В лист ожидания</>
-                  ) : (
-                    <><CreditCard className="w-4 h-4" /> Записаться · {dinner.price}</>
-                  )}
-                </button>
-                <a
-                  href="https://t.me/portion_admin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3.5 rounded-xl font-sans font-medium text-sm border border-border text-foreground hover:bg-secondary active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
-                >
-                  <Send className="w-4 h-4" /> Записаться в Telegram
-                </a>
-              </div>
-            )}
-
-            {screen === "form" && formStep < 3 && (
-              <button
-                disabled={
-                  formStep === 1 ? (!form.name || !form.age || !gender || !form.telegram) :
-                  formStep === 2 ? !form.experience.trim() : false
-                }
-                onClick={() => setFormStep(formStep + 1)}
-                className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                Далее <ArrowRight className="w-4 h-4" />
-              </button>
-            )}
-
-            {screen === "form" && formStep === 3 && (
-              <button
-                disabled={!allAgreed}
-                onClick={() => setScreen("payment")}
-                className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                <CreditCard className="w-4 h-4" /> Перейти к оплате
-              </button>
-            )}
-
-            {screen === "payment" && (
-              <button
-                onClick={() => setScreen("confirm")}
-                className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
-              >
-                <Lock className="w-4 h-4" /> Оплатить {dinner.price}
-              </button>
-            )}
-          </div>
-        )}
-
-        {screen === "confirm" && (
-          <div className="px-6 py-4 border-t border-border shrink-0 bg-background">
-            <button
-              onClick={onClose}
-              className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-secondary text-secondary-foreground hover:opacity-80 active:scale-[0.98] transition-all duration-200"
-            >
-              Закрыть
-            </button>
-          </div>
-        )}
+        <div className="px-6 py-4 border-t border-border shrink-0 bg-background">
+          <a
+            href={telegramHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3.5 rounded-xl font-sans font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
+          >
+            <Send className="w-4 h-4" /> Записаться — перейти в Telegram
+          </a>
+        </div>
       </div>
     </div>
   );
 }
 
-// ─── Small helpers ────────────────────────────────────────────────────────────
-
-const inputCls = "w-full bg-card border border-border rounded-xl px-4 py-3 text-sm font-sans text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
-
-function Field({ label, children, className = "" }: { label: string; children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`flex flex-col gap-1.5 ${className}`}>
-      <label className="text-sm font-sans font-medium text-foreground">{label}</label>
-      {children}
-    </div>
-  );
-}
-
-function InfoRow({ icon, label, value }: { icon: string; label: string; value: string }) {
-  return (
-    <div className="flex items-start gap-3">
-      <span className="text-base shrink-0">{icon}</span>
-      <div className="flex flex-col">
-        <span className="text-xs text-muted-foreground font-sans">{label}</span>
-        <span className="text-sm font-sans font-medium text-foreground">{value}</span>
-      </div>
-    </div>
-  );
-}
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
@@ -590,10 +277,6 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function App() {
   const [activeModal, setActiveModal] = useState<Dinner | null>(null);
-  const [waitlistForm, setWaitlistForm] = useState({ name: "", age: "", contact: "", request: "" });
-  const [waitlistSent, setWaitlistSent] = useState(false);
-  const [notifyEmail, setNotifyEmail] = useState("");
-  const [notifySent, setNotifySent] = useState(false);
 
   function scrollTo(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -608,7 +291,7 @@ export default function App() {
       <nav className="sticky top-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border">
         <div className="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <img src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785149907/logo1_dating_xbdik0.png" alt="" className="h-8 w-8 object-contain rounded-full" />
+            <img src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785149907/logo1_dating_xbdik0.png" alt="" className="h-12 w-auto object-contain" />
             <span className="font-semibold text-foreground leading-tight" style={{ fontFamily: "'Lora', serif", fontSize: "18px" }}>
               Порция знакомств
             </span>
@@ -620,20 +303,30 @@ export default function App() {
       </nav>
 
       {/* HERO */}
-      <section className="max-w-5xl mx-auto px-5 pt-20 pb-24 text-center">
-        <p className="text-sm font-medium text-primary tracking-widest uppercase font-sans mb-6">Москва · 2026</p>
-        <h1 className="text-5xl md:text-7xl font-semibold text-foreground leading-tight mb-6" style={{ fontFamily: "'Lora', serif" }}>
-          Бранчи и ужины <em className="text-primary font-medium">для тех, кто ищет своего человека</em>
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed mb-10">
-          Стол на троих мужчин и трёх женщин — объединённых не алгоритмом, а общим образом жизни. И просто хороший вечер.
-        </p>
-        <button
-          onClick={() => scrollTo("dinners")}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-sans font-medium text-base hover:opacity-90 active:scale-[0.98] transition-all duration-200"
-        >
-          Смотреть ужины <ArrowRight className="w-4 h-4" />
-        </button>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785185819/a602d89b-5801-4c04-865d-98924aeb6723_bhdeys.png"
+            alt=""
+            className="w-full h-full object-cover opacity-[0.12]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/75 to-background" />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-5 pt-20 pb-24 text-center">
+          <p className="text-sm font-medium text-primary tracking-widest uppercase font-sans mb-6">Москва · 2026</p>
+          <h1 className="text-5xl md:text-7xl font-semibold text-foreground leading-tight mb-6" style={{ fontFamily: "'Lora', serif" }}>
+            Бранчи и ужины <em className="text-primary font-medium">для тех, кто ищет своего человека</em>
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed mb-10">
+            Стол на троих мужчин и трёх женщин — объединённых не алгоритмом, а общим образом жизни. И просто хороший вечер.
+          </p>
+          <button
+            onClick={() => scrollTo("dinners")}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-sans font-medium text-base hover:opacity-90 active:scale-[0.98] transition-all duration-200"
+          >
+            Смотреть ужины <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
       </section>
 
       {/* HOW IT WORKS */}
@@ -642,10 +335,10 @@ export default function App() {
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground text-center mb-14" style={{ fontFamily: "'Lora', serif" }}>Как это работает</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { n: "01", title: "Выбери стол", desc: "Находишь ужин, который подходит по возрасту и интересу." },
-              { n: "02", title: "Анкета", desc: "Коротко о себе — имя, возраст, соцсети. Мы напишем тебе в Telegram." },
-              { n: "03", title: "Оплата", desc: "Бронируешь место. Деньги вернём, если стол не наберётся." },
-              { n: "04", title: "Приходи", desc: "В назначенный день — в ресторан. Без подготовки." },
+              { n: "01", title: "Выбери стол", desc: "Находишь стол, который подходит по возрасту и образу жизни." },
+              { n: "02", title: "Записывайся", desc: "Кнопка «Записаться» направит тебя к нашему админу — он ответит на все вопросы." },
+              { n: "03", title: "Приходи", desc: "В назначенный день — в ресторан. С нас — вопросы, которые помогут начать знакомство. С тебя — хорошее настроение." },
+              { n: "04", title: "Продолжай общаться", desc: "Напиши тем, кто понравился, чтобы договориться о новой встрече." },
             ].map((step) => (
               <div key={step.n} className="flex flex-col gap-3">
                 <span className="text-4xl font-semibold text-primary/30" style={{ fontFamily: "'Lora', serif" }}>{step.n}</span>
@@ -654,10 +347,6 @@ export default function App() {
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground font-sans mt-12 flex items-center justify-center gap-2">
-            <RotateCcw className="w-4 h-4" />
-            Если за 2 дня до встречи не набирается 6 человек — полный возврат
-          </p>
         </div>
       </section>
 
@@ -670,29 +359,6 @@ export default function App() {
             <DinnerCard key={d.id} dinner={d} onOpen={() => setActiveModal(d)} />
           ))}
         </div>
-
-        {/* NOTIFY ABOUT NEW TABLES */}
-        <div className="max-w-md mx-auto mt-14 text-center border-t border-border pt-10">
-          <p className="font-sans font-medium text-foreground mb-1">Хочу узнавать о новых столах</p>
-          <p className="text-sm text-muted-foreground font-sans mb-5">Пришлём письмо, когда откроется новый стол.</p>
-          {notifySent ? (
-            <p className="text-sm font-sans font-medium text-primary py-2">Готово, будем держать в курсе!</p>
-          ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setNotifySent(true); }} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                required
-                value={notifyEmail}
-                onChange={(e) => setNotifyEmail(e.target.value)}
-                placeholder="Email"
-                className={inputCls + " flex-1"}
-              />
-              <button type="submit" className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-sans font-medium hover:opacity-90 active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
-                Подписаться
-              </button>
-            </form>
-          )}
-        </div>
       </section>
 
       {/* HOW THE MEETING GOES */}
@@ -702,10 +368,10 @@ export default function App() {
           <p className="text-center text-muted-foreground font-sans mb-14 max-w-xl mx-auto">Простой формат без лишнего давления — только стол, разговор и шестеро людей с общим контекстом.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { emoji: "🙋", title: "Приходи один или с другом", desc: "Главное, будьте открыты к знакомству к новыми людьми" },
               { emoji: "🍽️", title: "Общий стол на шестерых", desc: "Трое мужчин и три женщины, объединённые общим образом жизни." },
+              { emoji: "🎲", title: "Игра-знакомство в начале", desc: "Пришлём вопросы, которые помогут разговориться с первых минут." },
               { emoji: "💬", title: "~2–2.5 часа разговора", desc: "Достаточно, чтобы понять, есть ли химия — без спешки и неловкости." },
-              { emoji: "💳", title: "Каждый платит за себя", desc: "Счёт в ресторане делится поровну — сплит без сложностей." },
+              { emoji: "💳", title: "Каждый платит за себя", desc: "У каждого свой чек — платишь только за то, что заказал(а) сам(а)." },
               { emoji: "🎯", title: "Без ожиданий", desc: "Это не свидание вслепую. Может получиться дружба, может — больше." },
               { emoji: "📍", title: "Место выбираем мы", desc: "Уютный ресторан в центре Москвы — детали пришлём заранее." },
             ].map((item, i) => (
@@ -724,37 +390,28 @@ export default function App() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6" style={{ fontFamily: "'Lora', serif" }}>О проекте</h2>
           <p className="text-muted-foreground font-sans leading-relaxed">
-            «Порция знакомств» — это бранчи и ужины для тех, кто не в отношениях и открыт к знакомствам.
+            <strong className="text-foreground font-semibold">Порция знакомств</strong> — это бранчи и ужины для тех, кто не в отношениях и открыт к знакомствам.
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            Мы собираем участников так, чтобы шанс, что знакомство перерастёт во что-то большее, был не нулевым — балансируем по полу и семейному положению.
+            Мы собираем участников так, чтобы шанс встретить своего человека был выше чем в дейтинг-приложениях: собираем столы из людей с общим образом жизни или ценностями — бегунов с бегунами, бёрнеров с бёрнерами.
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            При этом сама встреча — не свидание и уж тем более не смотрины. Ужин — это возможность узнать несколько классных новых людей. И заодно — дать судьбе ещё одну попытку свести вас с нужным человеком, без лишнего давления.
+            Сама встреча — не свидание и уж тем более не смотрины. Ужин — это возможность узнать несколько классных новых людей. И заодно — дать судьбе ещё одну попытку свести вас с нужным человеком, без лишнего давления.
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            Знаете анекдот про «да ты хоть лотерейный билет купи»?
+            Знаете анекдот про «да ты хоть лотерейный билет купи»? Многие из нас хотят встретить своего человека, но не тянут билет — не знакомятся с новыми людьми. А может, стоит?
           </p>
           <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            Многие из нас хотят встретить своего человека, но не тянут билет — не знакомятся с новыми людьми. А может, стоит?
-          </p>
-          <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            Мы со своей стороны стараемся сделать эту лотерею с шансами повыше, чем в дейтинг-приложениях: собираем небольшие столы из людей с общим образом жизни или ценностями — бегунов с бегунами, бёрнеров с бёрнерами.
-          </p>
-          <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-            А иногда на такой встрече находишь просто человека, близкого по духу, друга — а он потом знакомит тебя со своим человеком.
+            Кстати, иногда на такой встрече находишь просто человека, близкого по духу, друга — а он потом знакомит тебя со своим человеком.
           </p>
         </div>
       </section>
 
       {/* CREATORS */}
       <section className="max-w-5xl mx-auto px-5 py-20">
-        <h2 className="text-3xl md:text-4xl font-semibold text-foreground text-center mb-3" style={{ fontFamily: "'Lora', serif" }}>
+        <h2 className="text-3xl md:text-4xl font-semibold text-foreground text-center mb-12" style={{ fontFamily: "'Lora', serif" }}>
           Кто за этим стоит
         </h2>
-        <p className="text-center text-muted-foreground font-sans mb-12 max-w-lg mx-auto">
-          Проект придумала не команда стартаперов, а Юля — потому что ей самой надоело ходить на рандомные мероприятия.
-        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
           {/* Юля */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
@@ -765,15 +422,14 @@ export default function App() {
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-1" style={{ fontFamily: "'Lora', serif" }}>
-                Юля
+                Юлия Серебрийская
               </h3>
               <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Основательница</p>
               <div className="text-sm text-muted-foreground font-sans leading-relaxed flex flex-col gap-3">
-                <p>Привет, я Юля, и в детстве я очень любила ромкомы (романтические комедии).</p>
-                <p>Я выросла, стала руководителем аналитики, номадом, предпринимателем — но с ромкомами ничего не изменилось, я всё ещё их люблю :) И иногда создаю.</p>
-                <p>Весной 2026 года я вела мастермайнд про дейтинг — к концу 2 из 5 участников были в отношениях. Конечно, благодаря им самим, но и наши встречи внесли какую-то лепту.</p>
-                <p>Есть и ещё одна очень счастливая история, но она так мне дорога, что я вам не расскажу. Из неё я поняла: едва ли существует способ поменять чью-то жизнь так радикально к лучшему, как познакомить с правильным человеком — партнёром на жизнь.</p>
-                <p>Этот проект я продолжаю с надеждой, что кто-то из вас встретит своего человека — того, с кем нестрашно и весело строить жизнь.</p>
+                <p>Привет, я Юля, и в детстве я очень любила романтические комедии.</p>
+                <p>Я выросла, стала руководителем аналитики, номадом, предпринимателем — но с ромкомами ничего не изменилось, я всё ещё их люблю. И иногда создаю.</p>
+                <p>Весной 2026 года я вела мастермайнд про дейтинг — к концу 2 из 5 участников были в отношениях. Конечно, в основном благодаря им самим и волею судьбы, но и наши встречи внесли какую-то лепту.</p>
+                <p>Этот проект я делаю с надеждой, что кто-то из вас встретит своего человека — того, с кем нестрашно и весело строить жизнь.</p>
               </div>
             </div>
           </div>
@@ -808,31 +464,10 @@ export default function App() {
           <div className="max-w-xl mx-auto text-center">
             <Clock className="w-8 h-8 text-primary mx-auto mb-5" />
             <h2 className="text-3xl font-semibold text-foreground mb-3" style={{ fontFamily: "'Lora', serif" }}>Какой стол ещё нужен в проекте?</h2>
-            <p className="text-muted-foreground font-sans mb-8 leading-relaxed">Расскажи, какой стол ты бы хотел видеть — оставь контакт, и мы напишем, когда появится подходящий.</p>
-            {waitlistSent ? (
-              <div className="py-8"><div className="text-4xl mb-4">👋</div>
-                <p className="font-sans font-medium text-foreground">Получили, спасибо!</p>
-                <p className="text-muted-foreground font-sans text-sm mt-1">Напишем как только появится подходящий стол.</p>
-              </div>
-            ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setWaitlistSent(true); }} className="flex flex-col gap-4 text-left">
-                <Field label="Имя">
-                  <input value={waitlistForm.name} onChange={e => setWaitlistForm({ ...waitlistForm, name: e.target.value })} placeholder="Как тебя зовут" required className={inputCls} />
-                </Field>
-                <Field label="Возраст">
-                  <input value={waitlistForm.age} onChange={e => setWaitlistForm({ ...waitlistForm, age: e.target.value })} placeholder="Твой возраст" required className={inputCls} />
-                </Field>
-                <Field label="Контакт">
-                  <input value={waitlistForm.contact} onChange={e => setWaitlistForm({ ...waitlistForm, contact: e.target.value })} placeholder="Telegram или email" required className={inputCls} />
-                </Field>
-                <Field label="Какой стол ты бы хотел видеть?">
-                  <textarea value={waitlistForm.request} onChange={e => setWaitlistForm({ ...waitlistForm, request: e.target.value })} placeholder="Например: настольные игры 28–35, велосипедисты, книжный клуб..." rows={3} className={inputCls + " resize-none"} />
-                </Field>
-                <button type="submit" className="mt-2 flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-xl font-sans font-medium hover:opacity-90 active:scale-[0.98] transition-all duration-200">
-                  <Send className="w-4 h-4" />Отправить
-                </button>
-              </form>
-            )}
+            <p className="text-muted-foreground font-sans leading-relaxed">
+              Если не видите стола для себя — будем очень рады вашим идеям и предложениям, пишите в Telegram: {" "}
+              <a href="https://t.me/portion_admin" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">t.me/portion_admin</a>. Если просто хотите узнавать о новых столах — пишите туда же.
+            </p>
           </div>
         </div>
       </section>
@@ -857,9 +492,7 @@ export default function App() {
             <p className="text-sm text-muted-foreground font-sans mt-1">Бранчи и ужины для своих людей. Москва, 2026.</p>
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground font-sans">
-            <a href="https://t.me/zastolom" className="hover:text-foreground transition-colors">Telegram</a>
-            <a href="https://instagram.com/zastolom" className="hover:text-foreground transition-colors">Instagram</a>
-            <a href="mailto:hello@zastolom.ru" className="hover:text-foreground transition-colors">hello@zastolom.ru</a>
+            <a href="https://t.me/portion_admin" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a>
           </div>
         </div>
       </footer>
