@@ -439,14 +439,14 @@ export default function App() {
                 src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785264064/IMG20251209210939_fnpb6i.jpg"
                 alt="Юлия Серебрийская"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "center 40%" }}
+                style={{ objectPosition: "center 55%" }}
               />
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-1" style={{ fontFamily: "'Lora', serif" }}>
                 Юлия Серебрийская
               </h3>
-              <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Основательница</p>
+              <p className="text-xs font-sans font-medium text-primary uppercase tracking-widest mb-3">Основатель</p>
               <div className="text-sm text-muted-foreground font-sans leading-relaxed flex flex-col gap-3">
                 <p>Привет, я Юля, и в детстве я очень любила романтические комедии.</p>
                 <p>Я выросла, стала руководителем аналитики, номадом, предпринимателем — но с ромкомами ничего не изменилось, я всё ещё их люблю. И иногда создаю.</p>
