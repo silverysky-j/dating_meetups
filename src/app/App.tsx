@@ -101,7 +101,7 @@ function useBodyLock(active: boolean) {
 
 function DinnerCard({ dinner, onOpen }: { dinner: Dinner; onOpen: () => void }) {
   const weekday = dinner.date.split(", ")[1] ?? "";
-  const isPremium = dinner.tag === "Премиум";
+  const isPremium = dinner.tag === "Золото";
   return (
     <div
       onClick={onOpen}
@@ -391,7 +391,7 @@ export default function App() {
               { emoji: "🍽️", title: "Общий стол на шестерых", desc: "Трое мужчин и три женщины, объединённые общим образом жизни." },
               { emoji: "🎲", title: "Игра-знакомство в начале", desc: "Пришлём вопросы, которые помогут разговориться с первых минут." },
               { emoji: "💬", title: "~1,5–2 часа разговора", desc: "Достаточно, чтобы понять, есть ли химия — без спешки и неловкости." },
-              { emoji: "💳", title: "Каждый платит за себя", desc: "У каждого свой чек — платишь только за то, что заказал(а) сам(а)." },
+              { emoji: "💳", title: "Каждый платит за себя", desc: "Оплата в ресторане как обычно. Заранее мы берем только орг взнос." },
               { emoji: "🎯", title: "Без ожиданий", desc: "Это не свидание вслепую. Может получиться дружба, может — больше." },
               { emoji: "📍", title: "Место выбираем мы", desc: "Уютный ресторан в центре Москвы — детали пришлём заранее." },
             ].map((item, i) => (
@@ -440,7 +440,7 @@ export default function App() {
                 src="https://res.cloudinary.com/dnxwuzbau/image/upload/v1785264064/IMG20251209210939_fnpb6i.jpg"
                 alt="Юлия Серебрийская"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "center 25%" }}
+                style={{ objectPosition: "center 40%" }}
               />
             </div>
             <div className="p-6">
