@@ -168,7 +168,7 @@ function DinnerModal({ dinner, onClose }: { dinner: Dinner; onClose: () => void 
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const telegramHref = `https://t.me/portion_admin?text=${encodeURIComponent(`Привет, меня заинтересовал стол ${dinner.title}`)}`;
+  const telegramHref = `https://t.me/dating_admin?text=${encodeURIComponent(`Привет, меня заинтересовал стол ${dinner.title}`)}`;
   const isPremium = dinner.tag === "Премиум";
 
   return (
@@ -472,7 +472,7 @@ export default function App() {
                 <p>Партнёрство — одна из больших ценностей для меня (Юли). У проекта впереди долгий путь со своими вызовами. И для устойчивости на этом пути мне нужен человек, с которым я иду плечом к плечу к одной цели.</p>
                 <p>
                   Если вы видите, как могли бы принести пользу проекту — напишите в телеграм: {" "}
-                  <a href="https://t.me/portion_admin" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">t.me/portion_admin</a>. Особенно ценно, если у вас есть опыт в маркетинге ивент-проектов, но это не обязательное условие. Возможно, пазл складывается иначе :)
+                  <a href="https://t.me/dating_admin" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">t.me/dating_admin</a>. Особенно ценно, если у вас есть опыт в маркетинге ивент-проектов, но это не обязательное условие. Возможно, пазл складывается иначе :)
                 </p>
               </div>
             </div>
@@ -488,7 +488,7 @@ export default function App() {
             <h2 className="text-3xl font-semibold text-foreground mb-3" style={{ fontFamily: "'Lora', serif" }}>Какой стол ещё нужен в проекте?</h2>
             <p className="text-muted-foreground font-sans leading-relaxed">
               Если не видите стола для себя — будем очень рады вашим идеям и предложениям, пишите в Telegram: {" "}
-              <a href="https://t.me/portion_admin" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">t.me/portion_admin</a>. Если просто хотите узнавать о новых столах — пишите туда же.
+              <a href="https://t.me/dating_admin" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">t.me/dating_admin</a>. Если просто хотите узнавать о новых столах — пишите туда же.
             </p>
           </div>
         </div>
@@ -514,7 +514,7 @@ export default function App() {
             <p className="text-sm text-muted-foreground font-sans mt-1">Бранчи и ужины для своих людей. Москва, 2026.</p>
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground font-sans">
-            <a href="https://t.me/portion_admin" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a>
+            <a href="https://t.me/dating_admin" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a>
           </div>
         </div>
       </footer>
